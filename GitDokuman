@@ -1,0 +1,146 @@
+#Git reporsu oluşutma. Bulunduğunuz klasörde aşağıdaki komutu çalıştırın.
+git init 
+#Git ürününe kendimizi tanıtmak için ilk önce username ve sonrada mail adresimizi tanımlıyoruz.
+git config --global user.name "Ercan ESE"
+git config --global user.email "ercan.ese@bilgeadam.com"
+#Değşikliği doğrulamak için aşağıdaki komut ile config dosyasına bakabiliriz.
+git config --global -e
+#Help dosyasının cağırılması için -h komutu kullanılır.
+git config -h
+#Browserda detaylı şekilde görüntülemek için aşağıdaki komutu kullanırız.
+git config --help
+#Komut satırı üzerinden config dosyasındaki değerleri listelemek için.
+git config --global --get user.email
+#Status komutu ile dosyaların durumunu listeleriz.
+git status
+#Git üzerindeki dosyaların izlenmesini sağlamak için.
+git add .\Person.cs
+#tüm dosyaların izlnmesini sağlamak için.
+git add .
+#Dosyalarımızın ilk versiyonlamasını gerçekleştirdik.
+git commit -m 'First Commit.'
+#Commitleri versiyonları listelemek için.
+git log
+#Commit ile açıklama girmek için.
+git commit
+
+#Examples
+
+#Bir adet git reposu oluşturun.
+#Olusturgunuz repoya username ve email adresi tanımlayın.
+#Oluşturduğunuz bu git reposuna 2 adet dosya ekleyin ve Stage areaya alın.
+#Git status komutu ile doğrulayalım.
+#İlk commit(versiyonunuzu) oluşturun.
+#Oluşturdugunuz versiyonu log komutuyla kontrol edin.
+#Tekrar dosyalarınızda değişiklik yaparak süreci commite kadar getirin ve açıklamalı bşr commit yapın.
+#Log komutu ile tekrar kontrol sağlayın.
+
+#Git restore komutu Indexlenmeden önceki değişiklikleri geri almak için kullanırız.
+git restore .\Aged.cs
+git restore .
+
+#Stage alanından dosyayı geri alıp sonrada değişiklikleri geri alma işlemi.
+git restore --staged .\Aged.cs
+git restore .\Aged.cs
+
+#Dosyayı sildikten sonra yine commit yapmadan önceyse eğer aşağıdaki komuyla geri alabiliriz.
+git restore .\Aged.
+
+#Dosyayı rename etmek için veya farklı bir lokasyona taşımak için.
+git mv .\Aged.cs .\Age.cs
+
+#git ile izlenen bir dosyanın izlenmemesini sağlamak için.
+
+git rm --cached .\Title.cs
+
+#Git üzerinde commit edilmemiş ama ındex alanına gitmiş bir dosyanın eski versiyona dönmesini sağlayalım.
+#Index alanına gitmemiş bir dosyanın eski versiyona dönmesini sağlayalım.
+#Silinmiş bir dosyayı geri getirelim.
+#Bir dosyanın ismini değiştirelim.
+#İzlenen bir dosyayı izlenmeyecek duruma getirelim.
+
+#git ignore templateleri
+https://github.com/github/gitignore
+
+#gitignore olusturmadan önceki dosyalar izlenir cacheden temizlemek gerekir.
+git rm --cached <file> <file> or *.<file>
+#gitignore dosyasını oluşturdugumuzda izlenmesini istemediğimiz dosya veya klasörleri yazmamız gerekir.
+<#
+*.dll
+*.txt
+!demo.dll
+#>
+
+#bir adet gitignore dosyası oluşturalım oluşturdugumuz dosyada bin/ altındaki dll ve txtler izlenmesin fakat. module.dll diye bir dll varsa o izlensin.
+
+#Değişiklikleri ve farkları görmek için aşağıdaki komutları kullanıyoruz.
+git diff .\Person.cs
+git diff --staged .\Person.cs
+
+#diff tools
+kdiff3
+p4Merge
+winmerge
+Vscode
+
+#Belirli sayıda logları kısa halde getirmek için aşağıdaki komutu kullanmamız gerekir.
+git log --oneline -3
+
+#commitlerin içerisinde bulunan dosyaları listelemek için kullandığımız yöntem.
+git ls-tree dfe20aea82a2e8e52d3299d1531b84270b31a796 
+git ls-tree HEAD~3
+
+#git log filtre kullanmak için aşağıdaki gibi parametreleri kullanabibiliriz.
+
+git log --before="Tue Feb 21 12:37:41 2023 +0300"
+git log --before="one days ago"
+
+#iki commit arasındaki farkları görmek için.
+git diff de3723fb360068ee1ba70ee379ee6e013f11c75b 9fa65f28022023eb60d175d2a31d085c956ad55f
+git diff de3723fb360068ee1ba70ee379ee6e013f11c75b 9fa65f28022023eb60d175d2a31d085c956ad55f .\Person.cs
+
+#Bir dosyayı güncelleyin ve güncellenmeden önceki haliyle kıyaslayın.
+#Bir dosyayı güncelleyin ve staged area ya alın ve orada bir önceki haliyle kıyaslayın.
+#bir dosyayı güncelleyin ve commit alın bir önceki commit ile arasındaki farklı görüntüleyin.
+#Eski bir commit altındaki dosyaları gösteren komutu calıstırın.
+git ls-tree -r 23892e17a841a90807b62c3190a19a024ea596f1 #recursive alt klasör ve dosyalarıda getirir.
+#İlk 5 commit logunu ekranda tek satır halinde gösterin.
+
+#git shortlog komutu kısa olarak kimin proje üzerinde ne kadar arkif oldugunu gösterir.
+
+git shortlog -n -s -e
+
+#git log formatlamak için aşağıdaki şekilde işlem yapmak gerekir.
+git log --pretty=format:"%an %H"
+
+[alias]
+	lg = log --pretty=format:'%an committed %h'
+	shrt = shortlog -n -s -e
+
+#Branch oluşturmak için 
+git branch <branchname>
+
+#Branch silmek için kullandığımız kod fakat dikkat edilmesi gereken büyük D force siler kücük d force silmez merge etmeden silinirse hata verir.
+git branch -D demo
+#branch switch etmek için kullanılır.
+
+git switch branchname
+
+#iki branchi merge etme işlemi
+git merge <mergeedeceğimizbranch>
+
+#Belirli bir committen branch türetmek için aşağıdaki komut kullanılır.
+git branch demo 3dee61cd9508ae1dfb293385caf96b027e7e1bf2
+
+#Bir adet branch oluşturalım oluşturdugumuz branch üzerinde bir adet loginpage adında cs olusturalım içerisini dolduralım ve master ile merge edelim.
+
+#Git committen dosya veya tamamıyla geri dönmek için.
+
+git reset <commithash> .\LoginPage.cs --soft #bir önceki commiti tutar ve dosyayı staged alana alır.
+git reset <commithash> .\LoginPage.cs --hard #direk olarak bit önceki commite geri döndürür.
+
+#Uzak repo üzerine dosyalarımızı göndermek için ilk önce repo url eklememiz gerekiyor.
+git remote add origin https://github.com/ercanesee/tbb-moon.git
+
+#uzak repo üzerine local repoyu pushlamak için aşağıdaki komut yeterli olacaktır.
+git push origin <master>
