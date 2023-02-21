@@ -4,3 +4,4 @@ dasdsa
 dsdsdad
 sdad
 public int Demos { get; set; }
+public int MyProperty { get; set; }
