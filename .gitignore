@@ -1,3 +1,6 @@
 /bin/*.dll
 /bin/*.txt
 !module.dll
+*.ps1
+*.bat
+*.md
